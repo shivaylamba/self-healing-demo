@@ -1,0 +1,51 @@
+name: Self-Healing CI Demo
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  self-heal:
+    runs-on: ubuntu-latest
+    if: ${{ !startsWith(github.ref, 'refs/heads/kimchi-auto-fix-') }}
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run tests
+        id: tests
+        continue-on-error: true
+        run: |
+          pytest tests/
+
+      - name: Self-healing via composite action
+        if: steps.tests.outcome == 'failure'
+        uses: shivaylamba/kimchi-self-healing-action@main
+        with:
+          api-key: ${{ secrets.KIMCHI_API_KEY }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          test-command: pytest tests/
+          source-dir: .
+          blocked-paths: .github/workflows/**,tests/**
+          kimchi-version: v0.9.1
