@@ -48,5 +48,4 @@ jobs:
           test-command: python -m pytest tests/
           source-dir: .
           blocked-paths: .github/workflows/**,tests/**
-          kimchi-version: v0.9.1
-          kimchi-download-base: ${{ vars.KIMCHI_DOWNLOAD_BASE || 'https://get.kimchi.dev/releases' }}
+          kimchi-version: v0.1.21
