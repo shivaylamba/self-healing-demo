@@ -1,6 +1,6 @@
 # self-healing-demo
 
-A minimal demo repository for testing the test from [Kimchi Self-Healing Action](https://github.com/shivaylamba/kimchi-self-healing-action).
+A minimal demo repository for testing from [Kimchi Self-Healing Action](https://github.com/shivaylamba/kimchi-self-healing-action).
 
 ## The Bug
 
