@@ -1,6 +1,6 @@
 def add(a, b):
     """Add two numbers. Currently has an off-by-one bug."""
-    return a + b
+    return a + b * 30
 
 
 def multiply(a, b):
