@@ -47,5 +47,5 @@ jobs:
           github-token: ${{ secrets.KIMCHI_PAT }}
           test-command: python -m pytest tests/
           source-dir: .
-          blocked-paths: .github/workflows/**,tests/**
+          blocked-paths: .github/workflows/**
           kimchi-version: v0.1.21
