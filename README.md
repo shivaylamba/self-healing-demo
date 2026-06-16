@@ -21,8 +21,9 @@ The test in `tests/test_calculator.py` expects `add(2, 3) == 5`, which fails bec
 
 1. Fork this repo
 2. Add `KIMCHI_API_KEY` as a repository secret (Settings → Secrets → Actions)
-3. Push a change or open a PR that breaks the test
-4. Watch the self-healing workflow attempt to fix it
+3. **Create a Personal Access Token (PAT)** with `repo` scope and add it as `KIMCHI_PAT` (Settings → Secrets → Actions) — the default `GITHUB_TOKEN` cannot create PRs from workflows
+4. Push a change or open a PR that breaks the test
+5. Watch the self-healing workflow attempt to fix it
 
 ## License
 
